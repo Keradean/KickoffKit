@@ -2,10 +2,10 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 //////////////////////////////////////////////////////////////////////////////////////
-namespace JamStarter
+namespace KickoffKit.Editor
 {
-    // Adds "Tools > Jam Starter > Setup" to the Unity menu bar.
-    public static class JamStarterSetup
+    // Adds "Tools > Kickoff Kit > Setup" to the Unity menu bar.
+    public static class KickoffKitSetup
     {
         private const string RootFolder = "Assets";
 
@@ -25,7 +25,7 @@ namespace JamStarter
             "ThirdParty"
         };
         //////////////////////////////////////////////////////////////////////////////////////
-        [MenuItem("Tools/Jam Starter/Setup")]
+        [MenuItem("Tools/Kickoff Kit/Setup")]
         private static void RunSetup()
         {
             CreateFolders();
@@ -77,7 +77,7 @@ namespace JamStarter
             }
 
             var remove = EditorUtility.DisplayDialog(
-                "Jam Starter",
+                "Kickoff Kit",
                 "This project still has Unity's tutorial files (TutorialInfo and Readme). " +
                 "Move them to the trash?",
                 "Move to trash",
@@ -103,11 +103,11 @@ namespace JamStarter
 
             if (AssetDatabase.MoveAssetToTrash(path))
             {
-                Debug.Log($"Jam Starter: moved {path} to the trash.");
+                Debug.Log($"Kickoff Kit: moved {path} to the trash.");
             }
             else
             {
-                Debug.LogWarning($"Jam Starter: could not move {path} to the trash.");
+                Debug.LogWarning($"Kickoff Kit: could not move {path} to the trash.");
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////
@@ -120,14 +120,14 @@ namespace JamStarter
             if (VersionControlSettings.mode == "Hidden Meta Files")
             {
                 VersionControlSettings.mode = "Visible Meta Files";
-                Debug.Log("Jam Starter: switched Version Control mode to Visible Meta Files.");
+                Debug.Log("Kickoff Kit: switched Version Control mode to Visible Meta Files.");
             }
 
             // The serialization mode is an enum, so a typo would not even compile.
             if (EditorSettings.serializationMode != SerializationMode.ForceText)
             {
                 var switchNow = EditorUtility.DisplayDialog(
-                    "Jam Starter",
+                    "Kickoff Kit",
                     "Asset Serialization is not set to Force Text. Git can only merge scenes " +
                     "and prefabs that are saved as text.\n\nSwitch now? Unity will rewrite " +
                     "all assets, this can take a while in big projects.",
@@ -137,11 +137,11 @@ namespace JamStarter
                 if (switchNow)
                 {
                     EditorSettings.serializationMode = SerializationMode.ForceText;
-                    Debug.Log("Jam Starter: switched Asset Serialization to Force Text.");
+                    Debug.Log("Kickoff Kit: switched Asset Serialization to Force Text.");
                 }
                 else
                 {
-                    Debug.LogWarning("Jam Starter: Asset Serialization is not Force Text. " +
+                    Debug.LogWarning("Kickoff Kit: Asset Serialization is not Force Text. " +
                                      "You can change it in Project Settings > Editor.");
                 }
             }
@@ -161,11 +161,11 @@ namespace JamStarter
 
             if (string.IsNullOrEmpty(error))
             {
-                Debug.Log($"Jam Starter: moved {from} to {to}");
+                Debug.Log($"Kickoff Kit: moved {from} to {to}");
             }
             else
             {
-                Debug.LogWarning($"Jam Starter: could not move {from}. {error}");
+                Debug.LogWarning($"Kickoff Kit: could not move {from}. {error}");
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////
