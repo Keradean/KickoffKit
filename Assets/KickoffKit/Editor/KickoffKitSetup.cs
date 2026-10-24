@@ -4,7 +4,7 @@ using UnityEngine;
 //////////////////////////////////////////////////////////////////////////////////////
 namespace KickoffKit.Editor
 {
-    // Adds "Tools > Kickoff Kit > Setup" to the Unity menu bar.
+    // Adds "Tools > KickoffKit > Setup" to the Unity menu bar.
     public static class KickoffKitSetup
     {
         private const string RootFolder = "Assets";
@@ -25,15 +25,19 @@ namespace KickoffKit.Editor
             "ThirdParty"
         };
         //////////////////////////////////////////////////////////////////////////////////////
-        [MenuItem("Tools/Kickoff Kit/Setup")]
+        [MenuItem("Tools/KickoffKit/Setup")]
         private static void RunSetup()
         {
             CreateFolders();
+
             // Tells Unity to look at the disk again, so the new folders show up.
             AssetDatabase.Refresh();
+
             MoveDefaultFiles();
-            CheckGitSettings();
             RemoveTutorialFiles();
+            CheckGitSettings();
+
+            Debug.Log("KickoffKit: setup finished.");
         }
         //////////////////////////////////////////////////////////////////////////////////////
         private static void CreateFolders()
@@ -77,7 +81,7 @@ namespace KickoffKit.Editor
             }
 
             var remove = EditorUtility.DisplayDialog(
-                "Kickoff Kit",
+                "KickoffKit",
                 "This project still has Unity's tutorial files (TutorialInfo and Readme). " +
                 "Move them to the trash?",
                 "Move to trash",
@@ -91,7 +95,6 @@ namespace KickoffKit.Editor
             TrashIfExists("Assets/TutorialInfo");
             TrashIfExists("Assets/Readme.asset");
         }
-
         //////////////////////////////////////////////////////////////////////////////////////
         // MoveAssetToTrash puts the files in the system trash, so they can be restored.
         private static void TrashIfExists(string path)
@@ -103,11 +106,11 @@ namespace KickoffKit.Editor
 
             if (AssetDatabase.MoveAssetToTrash(path))
             {
-                Debug.Log($"Kickoff Kit: moved {path} to the trash.");
+                Debug.Log($"KickoffKit: moved {path} to the trash.");
             }
             else
             {
-                Debug.LogWarning($"Kickoff Kit: could not move {path} to the trash.");
+                Debug.LogWarning($"KickoffKit: could not move {path} to the trash.");
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////
@@ -120,14 +123,14 @@ namespace KickoffKit.Editor
             if (VersionControlSettings.mode == "Hidden Meta Files")
             {
                 VersionControlSettings.mode = "Visible Meta Files";
-                Debug.Log("Kickoff Kit: switched Version Control mode to Visible Meta Files.");
+                Debug.Log("KickoffKit: switched Version Control mode to Visible Meta Files.");
             }
 
             // The serialization mode is an enum, so a typo would not even compile.
             if (EditorSettings.serializationMode != SerializationMode.ForceText)
             {
                 var switchNow = EditorUtility.DisplayDialog(
-                    "Kickoff Kit",
+                    "KickoffKit",
                     "Asset Serialization is not set to Force Text. Git can only merge scenes " +
                     "and prefabs that are saved as text.\n\nSwitch now? Unity will rewrite " +
                     "all assets, this can take a while in big projects.",
@@ -137,11 +140,11 @@ namespace KickoffKit.Editor
                 if (switchNow)
                 {
                     EditorSettings.serializationMode = SerializationMode.ForceText;
-                    Debug.Log("Kickoff Kit: switched Asset Serialization to Force Text.");
+                    Debug.Log("KickoffKit: switched Asset Serialization to Force Text.");
                 }
                 else
                 {
-                    Debug.LogWarning("Kickoff Kit: Asset Serialization is not Force Text. " +
+                    Debug.LogWarning("KickoffKit: Asset Serialization is not Force Text. " +
                                      "You can change it in Project Settings > Editor.");
                 }
             }
@@ -155,17 +158,18 @@ namespace KickoffKit.Editor
             {
                 return;
             }
+
             // MoveAsset takes the .meta file with it. The ID inside stays the
             // same, so every reference to the file keeps working.
             var error = AssetDatabase.MoveAsset(from, to);
 
             if (string.IsNullOrEmpty(error))
             {
-                Debug.Log($"Kickoff Kit: moved {from} to {to}");
+                Debug.Log($"KickoffKit: moved {from} to {to}");
             }
             else
             {
-                Debug.LogWarning($"Kickoff Kit: could not move {from}. {error}");
+                Debug.LogWarning($"KickoffKit: could not move {from}. {error}");
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////
