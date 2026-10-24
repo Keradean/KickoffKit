@@ -13,7 +13,7 @@ That's it. No menus, no managers, no sample code. How your game works is up to y
 
 ## Tested with
 
-Unity 6.3 LTS (6000.3.10f1), Universal Render Pipeline, 3D.
+Unity 6.3 LTS (6000.3.10f1) and Unity 6.6 (6000.6.3f1), Universal Render Pipeline, 3D. Tested on Linux so far.
 
 ## Quick start: use the template
 
@@ -46,6 +46,7 @@ Everyone on the team needs step 1 before cloning. Without Git LFS, images and mo
 
 - Creates the folders listed below. Every empty folder gets a `.gitkeep` file, because Git doesn't store empty folders.
 - Moves the files every new Unity 6 project starts with into `_Project`: `Settings`, `InputSystem_Actions` and `Scenes/SampleScene`. It only moves them if they are still where Unity put them and nothing is in the way. It never overwrites anything.
+- Offers to move Unity's tutorial files (`TutorialInfo` and `Readme`) to the trash. It asks first, and you can restore them from your system trash.
 - Checks two settings Git depends on. Version Control mode must not be **Hidden Meta Files**, and Asset Serialization should be **Force Text**. Before switching the serialization it asks you first, because Unity rewrites every asset when it does that.
 - Logs every change to the Console.
 
@@ -81,7 +82,9 @@ Assets/
 
 ## Good to know
 
-**GPU Resident Drawer is turned off.** The Universal 3D template turns it on, but it doesn't work in WebGL builds or with OpenGL, which a lot of Linux setups use. It only pays off in scenes with lots of objects anyway. To turn it back on, select `_Project/Settings/PC_RPAsset` and set **Rendering > GPU Resident Drawer** to **Instanced Drawing**.
+**GPU Resident Drawer is turned off in the template.** The Universal 3D template turns it on, but it doesn't work in WebGL builds or with OpenGL, which a lot of Linux setups use. It only pays off in scenes with lots of objects anyway.
+
+If you added the starter to your own project and see a `GPUResidentDrawer` warning in the Console, select `_Project/Settings/PC_RPAsset` and set **Rendering > GPU Resident Drawer** to **Disabled**. To turn it back on, set it to **Instanced Drawing**.
 
 **Git LFS has storage limits.** Large files count against the LFS quota of your Git host. Check what your plan includes before you push a few hundred megabytes of audio.
 
