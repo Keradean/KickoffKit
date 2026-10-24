@@ -33,6 +33,7 @@ namespace JamStarter
             AssetDatabase.Refresh();
             MoveDefaultFiles();
             CheckGitSettings();
+            RemoveTutorialFiles();
         }
         //////////////////////////////////////////////////////////////////////////////////////
         private static void CreateFolders()
@@ -66,8 +67,51 @@ namespace JamStarter
             DeleteFolderIfEmpty("Assets/Scenes");
         }
         //////////////////////////////////////////////////////////////////////////////////////
+        // New Universal 3D projects come with Unity's tutorial files. A jam does not need
+        // them, and their editor script can mess up the Project window on first open.
+        private static void RemoveTutorialFiles()
+        {
+            if (!Exists("Assets/TutorialInfo") && !Exists("Assets/Readme.asset"))
+            {
+                return;
+            }
+
+            var remove = EditorUtility.DisplayDialog(
+                "Jam Starter",
+                "This project still has Unity's tutorial files (TutorialInfo and Readme). " +
+                "Move them to the trash?",
+                "Move to trash",
+                "Keep");
+
+            if (!remove)
+            {
+                return;
+            }
+
+            TrashIfExists("Assets/TutorialInfo");
+            TrashIfExists("Assets/Readme.asset");
+        }
+
         //////////////////////////////////////////////////////////////////////////////////////
-// Git needs the .meta files next to the assets and scenes saved as readable text.
+        // MoveAssetToTrash puts the files in the system trash, so they can be restored.
+        private static void TrashIfExists(string path)
+        {
+            if (!Exists(path))
+            {
+                return;
+            }
+
+            if (AssetDatabase.MoveAssetToTrash(path))
+            {
+                Debug.Log($"Jam Starter: moved {path} to the trash.");
+            }
+            else
+            {
+                Debug.LogWarning($"Jam Starter: could not move {path} to the trash.");
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////
+        // Git needs the .meta files next to the assets and scenes saved as readable text.
         private static void CheckGitSettings()
         {
             // The version control mode is a plain string in Unity.

@@ -1,4 +1,4 @@
-# JamStarter
+# KickoffKit
 
 A small Unity 6 starter for game jam teams. It gives you a clean folder structure, Git with LFS that works right away and a setup script, so your team spends the first hour on the game and not on project setup.
 
@@ -7,7 +7,7 @@ A small Unity 6 starter for game jam teams. It gives you a clean folder structur
 - A folder structure for 3D projects that keeps your own files (`_Project`) apart from downloaded assets (`ThirdParty`)
 - `.gitignore` for Unity, Rider, Visual Studio and VS Code
 - `.gitattributes` that normalizes line endings and stores large files (images, models, audio, video, fonts) with Git LFS
-- A setup script under **Tools > Jam Starter > Setup**
+- A setup script under **Tools > KickoffKit > Setup**
 
 That's it. No menus, no managers, no sample code. How your game works is up to you.
 
@@ -32,8 +32,8 @@ Everyone on the team needs step 1 before cloning. Without Git LFS, images and mo
 
 1. Create a project in Unity Hub with the **Universal 3D** template, or open the one you already have.
 2. Copy `.gitignore` and `.gitattributes` into the project root, next to the `Assets` folder. Both names start with a dot, so your file manager might hide them.
-3. Copy the `JamStarter` folder into `Assets`.
-4. In Unity, click **Tools > Jam Starter > Setup**.
+3. Copy the `KickoffKit` folder into `Assets`.
+4. In Unity, click **Tools > KickoffKit > Setup**.
 5. Open a terminal in the project folder and run:
    ```
    git init -b main
@@ -50,7 +50,7 @@ Everyone on the team needs step 1 before cloning. Without Git LFS, images and mo
 - Checks two settings Git depends on. Version Control mode must not be **Hidden Meta Files**, and Asset Serialization should be **Force Text**. Before switching the serialization it asks you first, because Unity rewrites every asset when it does that.
 - Logs every change to the Console.
 
-You can run it as often as you like. If everything is already in place, nothing happens. Once your project is set up, you can delete `Assets/JamStarter`.
+You can run it as often as you like. If everything is already in place, nothing happens. Once your project is set up, you can delete `Assets/KickoffKit`.
 
 ## Folder structure
 
@@ -71,7 +71,7 @@ Assets/
 │   ├── Scripts/
 │   ├── Settings/
 │   └── UI/
-├── JamStarter/
+├── KickoffKit/
 │   └── Editor/
 └── ThirdParty/
 ```
