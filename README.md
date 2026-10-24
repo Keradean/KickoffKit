@@ -87,7 +87,7 @@ Assets/
 
 ## License
 
-LICENSE_PLACEHOLDER
+MIT, see [LICENSE](LICENSE). You can use the starter in any project, also commercial ones.
 
 ## Links
 
