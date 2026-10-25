@@ -94,4 +94,4 @@ MIT, see [LICENSE](LICENSE). You can use the starter in any project, also commer
 
 ## Links
 
-itch.io: ITCH_LINK_PLACEHOLDER
+itch.io: https://keradean.itch.io/kickoffkit
